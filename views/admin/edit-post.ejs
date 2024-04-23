@@ -1,21 +1,30 @@
+<% if (data) { %>
 <a href="/dashboard">&larr; Back</a>
 <div class="admin-title">
   <h2>View / Edit Post</h2>
 
-  <form action="/delete-post/<%= data._id %>?_method=DELETE" method="POST">
-    <input type="submit" value="Delete" class="btn-delete btn">
+  <form action="/delete-post/<%= post._id %>?_method=DELETE" method="POST">
+    <input type="submit" value="Delete" class="btn-delete btn" />
   </form>
-
 </div>
 
-<form action="/edit-post/<%= data._id %>?_method=PUT" method="POST">
-
+<form action="/edit-post/<%= post._id %>?_method=PUT" method="POST">
   <label for="title"><b>Title</b></label>
-  <input type="text" placeholder="Post Title" name="title" value="<%= data.title %>">
+  <input
+    type="text"
+    placeholder="Post Title"
+    name="title"
+    value="<%= data.title %>"
+  />
 
   <label for="body"><b>Content</b></label>
-  <textarea name="body" cols="50" rows="10"><%= data.body %></textarea>
+  <textarea name="body" cols="50" rows="10"><%= post.body %></textarea>
 
-  <input type="submit" value="Update" class="btn">
-
+  <input type="submit" value="Update" class="btn" />
 </form>
+<% } else { %>
+<div class="error-message">
+  <p>You do not have permission to edit this post, or it does not exist.</p>
+  <a href="/dashboard">Return to Dashboard</a>
+</div>
+<% } %>
